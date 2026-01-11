@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Service Details - Gp Bootstrap Template</title>
+  <title>ZH2 Technologies</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -73,7 +73,7 @@
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <h1 style="padding-top: 40px;">Service Details</h1>
-              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+              <p class="mb-0">We provide tailored technology services focused on solving real business challenges. Our solutions are scalable, secure, and designed to deliver long-term value through reliable engineering</p>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@
               <i class="bi bi-headset help-icon"></i>
               <h4>Have a Question?</h4>
               <p class="d-flex align-items-center mt-2 mb-0"><i class="bi bi-telephone me-2"></i> <span>+92 328 4488438</span></p>
-              <p class="d-flex align-items-center mt-1 mb-0"><i class="bi bi-envelope me-2"></i> <a href="zh2technologies@gmail.com">zh2technologies@gmail.com</a></p>
+              <a class="d-flex align-items-center mt-1 mb-0" href="https://mail.google.com/mail/?view=cm&fs=1&to=zh2technologies@gmail.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-envelope me-2"></i><span>zh2technologies@gmail.com</span></a>
             </div>
 
           </div>
@@ -250,12 +250,12 @@
               <p class="mt-3"><strong>Phone:</strong> <span>+92 328 4488438</span></p>
             </div>
             <div class="social-links d-flex mt-4">
-              <a href=""><i class="bi bi-envelope"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zh2technologies@gmail.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-envelope"></i></a>
+              <a href="" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links">
+          <div class="col-lg-4 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="#"> Home</a></li>
@@ -266,14 +266,14 @@
             </ul>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links">
+          <div class="col-lg-4 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#"> Data</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#"> DevOps</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#"> AI chatbots</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#"> Applications</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#"> Automation</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#service-data"> Data</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#service-devops"> DevOps</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#service-ai-chatbots"> AI chatbots</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#service-applications"> Applications</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#service-automation"> Automation</a></li>
             </ul>
           </div>
 
@@ -285,7 +285,7 @@
 
     <div class="copyright">
       <div class="container text-center">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">GP</strong> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">ZH2</strong> <span>All Rights Reserved</span></p>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you've purchased the pro version. -->
@@ -302,6 +302,11 @@
 
   <!-- Preloader -->
   <div id="preloader"></div>
+
+  <!-- Download Catalog Popup -->
+  <div id="download-popup" class="download-popup">
+    Feature unavailable yet
+  </div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -377,6 +382,103 @@
       
       // Set initial active state
       updateActiveLink();
+
+      // Handle hash navigation from external links (e.g., from index.html footer)
+      // Use the EXACT same scrollIntoView method as the Services list buttons
+      function handleHashNavigation() {
+        const hash = window.location.hash;
+        if (hash) {
+          const targetSection = document.querySelector(hash);
+          if (targetSection) {
+            // Use scrollIntoView EXACTLY like Services list buttons do
+            // This respects scroll-margin-top: 100px from CSS
+            targetSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            
+            // Update active state in Services list
+            serviceLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === hash) {
+                link.classList.add('active');
+              }
+            });
+          }
+        }
+      }
+      
+      // Handle hash on page load (cross-page navigation)
+      // Prevent browser's default scroll, then use our scrollIntoView method
+      if (window.location.hash) {
+        // Immediately prevent browser's default scroll
+        if (history.scrollRestoration) {
+          history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+        
+        // Wait for page to be fully rendered, then scroll
+        function executeScroll() {
+          // Double requestAnimationFrame ensures layout is complete
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              handleHashNavigation();
+            });
+          });
+        }
+        
+        // Wait a bit longer to ensure all CSS and layout is applied
+        if (document.readyState === 'complete') {
+          setTimeout(executeScroll, 100);
+        } else {
+          window.addEventListener('load', function() {
+            setTimeout(executeScroll, 100);
+          }, { once: true });
+        }
+      }
+      
+      // Handle hash changes (browser back/forward)
+      window.addEventListener('hashchange', () => {
+        handleHashNavigation();
+      });
+
+      // Handle Download Catalog button clicks
+      const downloadLinks = document.querySelectorAll('.download-catalog a');
+      const downloadPopup = document.getElementById('download-popup');
+      
+      downloadLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Show popup
+          downloadPopup.classList.add('show');
+          
+          // Hide popup after 2 seconds
+          setTimeout(() => {
+            downloadPopup.classList.remove('show');
+          }, 2000);
+        });
+      });
+
+      // Handle LinkedIn button clicks in footer
+      const linkedinLinks = document.querySelectorAll('.footer .social-links a .bi-linkedin');
+      
+      linkedinLinks.forEach(icon => {
+        const link = icon.closest('a');
+        if (link) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Show popup (reuse download popup)
+            downloadPopup.classList.add('show');
+            
+            // Hide popup after 2 seconds
+            setTimeout(() => {
+              downloadPopup.classList.remove('show');
+            }, 2000);
+          });
+        }
+      });
     });
   </script>
 

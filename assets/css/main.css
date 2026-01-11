@@ -64,6 +64,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 a {
@@ -777,6 +778,13 @@ section,
   .section {
     scroll-margin-top: 58px;
   }
+
+  /* Ensure containers don't overflow */
+  .container,
+  .container-fluid {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -829,7 +837,8 @@ section,
   justify-content: center;
 }
 
-.hero img {
+.hero img,
+.hero .hero-video {
   position: absolute;
   inset: 0;
   display: block;
@@ -837,6 +846,10 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
+}
+
+.hero .hero-video {
+  pointer-events: none;
 }
 
 .hero:before {
@@ -1114,15 +1127,19 @@ section,
   clip-path: inset(0);
 }
 
-.call-to-action img {
-  position: fixed;
-  top: 0;
-  left: 0;
+.call-to-action img,
+.call-to-action .cta-video {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 1;
+}
+
+.call-to-action .cta-video {
+  pointer-events: none;
 }
 
 .call-to-action:before {
@@ -1219,11 +1236,11 @@ section,
 }
 
 .portfolio .portfolio-item .portfolio-info {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   left: 12px;
   right: 12px;
-  bottom: -100%;
+  bottom: 0;
   z-index: 3;
   transition: all ease-in-out 0.5s;
   background: color-mix(in srgb, var(--background-color), transparent 10%);
@@ -1262,11 +1279,6 @@ section,
 .portfolio .portfolio-item .portfolio-info .details-link {
   right: 14px;
   font-size: 28px;
-}
-
-.portfolio .portfolio-item:hover .portfolio-info {
-  opacity: 1;
-  bottom: 0;
 }
 
 /*--------------------------------------------------------------
@@ -1323,6 +1335,7 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  pointer-events: none;
 }
 
 .testimonials .container {
@@ -1747,6 +1760,34 @@ section,
   color: var(--accent-color);
 }
 
+/* Download Catalog Popup */
+.download-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--surface-color);
+  color: var(--default-color);
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 250px;
+}
+
+.download-popup.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .service-details .help-box {
   background-color: var(--accent-color);
   color: var(--contrast-color);
@@ -1799,4 +1840,372 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+}
+
+/*--------------------------------------------------------------
+# Responsive Design - Mobile & Tablet
+--------------------------------------------------------------*/
+
+/* Tablet and below (max-width: 991px) */
+@media (max-width: 991.98px) {
+  /* Hero Section */
+  .hero {
+    min-height: 80vh;
+    padding: 100px 0 60px 0;
+  }
+
+  .hero h2 {
+    font-size: 42px;
+  }
+
+  .hero p {
+    font-size: 20px;
+  }
+
+  .hero .icon-box {
+    padding: 25px 15px;
+  }
+
+  .hero .icon-box i {
+    font-size: 28px;
+  }
+
+  /* Section Titles */
+  .section-title {
+    padding-bottom: 40px;
+  }
+
+  .section-title p {
+    font-size: 28px;
+  }
+
+  /* Service Details */
+  .service-details .col-lg-4 {
+    position: relative;
+    top: 0;
+    margin-bottom: 40px;
+  }
+
+  .service-details h3 {
+    font-size: 22px;
+  }
+
+  /* Footer */
+  .footer .footer-top {
+    padding: 40px 0;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* General spacing */
+  section,
+  .section {
+    padding: 60px 0;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 70vh;
+    padding: 80px 0 50px 0;
+  }
+
+  .hero h2 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 18px;
+    margin-top: 15px;
+  }
+
+  .hero .icon-box {
+    padding: 20px 15px;
+    margin-bottom: 20px;
+  }
+
+  .hero .icon-box i {
+    font-size: 24px;
+  }
+
+  .hero .icon-box h3 {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  /* Section Titles */
+  .section-title {
+    padding-bottom: 30px;
+  }
+
+  .section-title h2 {
+    font-size: 12px;
+  }
+
+  .section-title h2::after {
+    width: 80px;
+    margin: 4px 8px;
+  }
+
+  .section-title p {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  /* Page Title */
+  .page-title .heading {
+    padding: 60px 0 50px 0;
+  }
+
+  .page-title .heading h1 {
+    font-size: 28px;
+    padding-top: 20px !important;
+  }
+
+  /* About Section */
+  .about .content h3 {
+    font-size: 24px;
+  }
+
+  /* Services Section */
+  .service-item {
+    margin-bottom: 30px;
+  }
+
+  .service-item h3 {
+    font-size: 20px;
+  }
+
+  /* Service Details */
+  .service-details {
+    padding: 60px 0;
+  }
+
+  .service-details .col-lg-4 {
+    margin-bottom: 30px;
+  }
+
+  .service-details h3 {
+    font-size: 20px;
+  }
+
+  .service-details .service-content-section {
+    scroll-margin-top: 80px;
+    margin-bottom: 40px;
+  }
+
+  .service-details .services-img {
+    margin-bottom: 15px;
+  }
+
+  /* Team Section */
+  .team-member {
+    margin-bottom: 30px;
+  }
+
+  /* Stats Section */
+  .stats.section {
+    padding-bottom: 60px !important;
+  }
+
+  .stats-item {
+    margin-bottom: 25px;
+  }
+
+  /* Contact Section */
+  .contact .info-item {
+    margin-bottom: 25px;
+  }
+
+  .contact .info-item i {
+    font-size: 20px;
+    margin-right: 15px;
+  }
+
+  /* Footer */
+  .footer .footer-top {
+    padding: 30px 0;
+  }
+
+  .footer .footer-about,
+  .footer .footer-links {
+    margin-bottom: 30px;
+  }
+
+  .footer .footer-about .logo span {
+    font-size: 22px;
+  }
+
+  .footer .footer-links h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .footer .footer-links ul {
+    font-size: 14px;
+  }
+
+  /* Call to Action */
+  .call-to-action h3 {
+    font-size: 24px;
+  }
+
+  .call-to-action p {
+    font-size: 16px;
+  }
+
+  /* Testimonials */
+  .testimonial-item {
+    padding: 25px;
+  }
+
+  .testimonial-item h3 {
+    font-size: 18px;
+  }
+
+  .testimonial-item h4 {
+    font-size: 14px;
+  }
+
+  /* Portfolio */
+  .portfolio-item {
+    margin-bottom: 20px;
+  }
+}
+
+/* Small Mobile (max-width: 576px) */
+@media (max-width: 576px) {
+  /* Hero Section */
+  .hero {
+    min-height: 60vh;
+    padding: 60px 0 40px 0;
+  }
+
+  .hero h2 {
+    font-size: 26px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .hero .icon-box {
+    padding: 15px 10px;
+  }
+
+  .hero .icon-box i {
+    font-size: 20px;
+  }
+
+  .hero .icon-box h3 {
+    font-size: 14px;
+  }
+
+  /* Section Titles */
+  .section-title {
+    padding-bottom: 25px;
+  }
+
+  .section-title p {
+    font-size: 20px;
+  }
+
+  .section-title h2::after {
+    width: 60px;
+    margin: 4px 6px;
+  }
+
+  /* Page Title */
+  .page-title .heading {
+    padding: 50px 0 40px 0;
+  }
+
+  .page-title .heading h1 {
+    font-size: 24px;
+    padding-top: 15px !important;
+  }
+
+  /* Service Details */
+  .service-details h3 {
+    font-size: 18px;
+  }
+
+  .service-details .service-content-section {
+    scroll-margin-top: 70px;
+  }
+
+  /* Footer */
+  .footer .footer-top {
+    padding: 25px 0;
+  }
+
+  .footer .footer-about .logo span {
+    font-size: 20px;
+  }
+
+  /* Contact Form */
+  .php-email-form .form-control {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  /* Call to Action */
+  .call-to-action h3 {
+    font-size: 20px;
+  }
+
+  .call-to-action p {
+    font-size: 14px;
+  }
+
+  .call-to-action .cta-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+
+  /* Testimonials */
+  .testimonial-item {
+    padding: 20px;
+  }
+
+  /* About Section */
+  .about .content h3 {
+    font-size: 20px;
+  }
+
+  .about .content ul li {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  /* Container padding for mobile */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Buttons */
+  .btn-getstarted,
+  .cta-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+
+  /* Prevent text overflow */
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  p, span, a, li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 }
