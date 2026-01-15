@@ -1235,22 +1235,87 @@ section,
   overflow: hidden;
 }
 
-.portfolio .portfolio-item .portfolio-info {
+.portfolio .portfolio-item img {
+  opacity: 0.20;
+  transition: opacity ease-in-out 0.5s;
+}
+
+.portfolio .portfolio-item:hover img {
   opacity: 1;
+}
+
+.portfolio .portfolio-item .portfolio-info {
   position: absolute;
-  left: 12px;
-  right: 12px;
+  left: 0;
+  right: 0;
+  top: 0;
   bottom: 0;
   z-index: 3;
   transition: all ease-in-out 0.5s;
-  background: color-mix(in srgb, var(--background-color), transparent 10%);
-  padding: 15px;
+  background: transparent;
+  padding: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 .portfolio .portfolio-item .portfolio-info h4 {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: semi-bold;
+  font-style: italic;
   padding-right: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  opacity: 1;
+  visibility: visible;
+  transition: all ease-in-out 0.5s;
+  padding: 0;
+  width: auto;
+  max-width: calc(100% - 24px);
+  text-align: center;
+  white-space: nowrap;
+  color: var(--contrast-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 0.8), 2px 2px 4px rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
+
+.portfolio .portfolio-item .portfolio-info p,
+.portfolio .portfolio-item .portfolio-info .preview-link,
+.portfolio .portfolio-item .portfolio-info .details-link {
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease-in-out 0.5s;
+}
+
+.portfolio .portfolio-item:hover .portfolio-info {
+  background: color-mix(in srgb, var(--background-color), transparent 10%);
+  left: 12px;
+  right: 12px;
+  top: auto;
+  bottom: 0;
+  padding: 15px;
+}
+
+.portfolio .portfolio-item:hover .portfolio-info h4 {
+  position: static;
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  padding-right: 50px;
+  text-align: left;
+  white-space: normal;
+  text-shadow: none;
+  color: inherit;
+  pointer-events: auto;
+}
+
+.portfolio .portfolio-item:hover .portfolio-info p,
+.portfolio .portfolio-item:hover .portfolio-info .preview-link,
+.portfolio .portfolio-item:hover .portfolio-info .details-link {
+  opacity: 1;
+  visibility: visible;
 }
 
 .portfolio .portfolio-item .portfolio-info p {
@@ -1279,6 +1344,11 @@ section,
 .portfolio .portfolio-item .portfolio-info .details-link {
   right: 14px;
   font-size: 28px;
+}
+
+.portfolio .portfolio-item:hover .portfolio-info {
+  opacity: 1;
+  bottom: 0;
 }
 
 /*--------------------------------------------------------------
@@ -1977,6 +2047,33 @@ section,
     font-size: 20px;
   }
 
+  /* Portfolio Section - Info bar always visible on mobile */
+  .portfolio .portfolio-item .portfolio-info {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: 0;
+    background: color-mix(in srgb, var(--background-color), transparent 10%);
+    padding: 15px;
+  }
+
+  .portfolio .portfolio-item .portfolio-info h4 {
+    position: static;
+    transform: none;
+    padding-right: 50px;
+    text-align: left;
+    white-space: normal;
+    text-shadow: none;
+    color: inherit;
+  }
+
+  .portfolio .portfolio-item .portfolio-info p,
+  .portfolio .portfolio-item .portfolio-info .preview-link,
+  .portfolio .portfolio-item .portfolio-info .details-link {
+    opacity: 1;
+    visibility: visible;
+  }
+
   /* Service Details */
   .service-details {
     padding: 60px 0;
@@ -2002,6 +2099,12 @@ section,
   /* Team Section */
   .team-member {
     margin-bottom: 30px;
+  }
+
+  /* Team member social links always visible on mobile */
+  .team .team-member .social {
+    opacity: 1;
+    bottom: 15px;
   }
 
   /* Stats Section */
