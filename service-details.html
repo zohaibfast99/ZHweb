@@ -251,18 +251,18 @@
             </div>
             <div class="social-links d-flex mt-4">
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zh2technologies@gmail.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-envelope"></i></a>
-              <a href="" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+              <a href="https://www.linkedin.com/company/zh2-technologies/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#"> Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#about"> About</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#services"> Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#portfolio"> Portfolio</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#testimonials"> Reviews</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.html#hero"> Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.html#about"> About</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.html#services"> Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.html#portfolio"> Portfolio</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.html#testimonials"> Reviews</a></li>
             </ul>
           </div>
 
@@ -458,26 +458,6 @@
             downloadPopup.classList.remove('show');
           }, 2000);
         });
-      });
-
-      // Handle LinkedIn button clicks in footer
-      const linkedinLinks = document.querySelectorAll('.footer .social-links a .bi-linkedin');
-      
-      linkedinLinks.forEach(icon => {
-        const link = icon.closest('a');
-        if (link) {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Show popup (reuse download popup)
-            downloadPopup.classList.add('show');
-            
-            // Hide popup after 2 seconds
-            setTimeout(() => {
-              downloadPopup.classList.remove('show');
-            }, 2000);
-          });
-        }
       });
     });
   </script>
