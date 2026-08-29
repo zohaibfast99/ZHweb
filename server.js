@@ -2,7 +2,6 @@ const express = require('express');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,12 +14,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('.'));
 
 // Email configuration
+const { EMAIL_USER, EMAIL_PASS, CONTACT_TO } = process.env;
+
+if (!EMAIL_USER || !EMAIL_PASS) {
+  console.error('EMAIL_USER and EMAIL_PASS must be set (see .env.example)');
+  process.exit(1);
+}
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER || 'zh2technologies@gmail.com',
-    pass: process.env.EMAIL_PASS || 'fwxk uttf jddh pfxx' // You'll need to set this as an environment variable or use App Password
-  }
+  auth: { user: EMAIL_USER, pass: EMAIL_PASS }
 });
 
 // Contact form endpoint - handle multipart/form-data
@@ -42,7 +45,7 @@ app.post('/forms/contact.php', upload.none(), async (req, res) => {
     // Email content
     const mailOptions = {
       from: `${email}`,
-      to: 'zh2technologies@gmail.com',
+      to: CONTACT_TO || EMAIL_USER,
       subject: `${subject}`,
       html: `
         <p>${message.replace(/\n/g, '<br>')}</p>
